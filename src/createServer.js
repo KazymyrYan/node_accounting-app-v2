@@ -170,7 +170,7 @@ function createServer() {
 
     const expense = {
       id: expenses.length + 1,
-      userId,
+      userId: Number(userId),
       spentAt,
       title,
       amount,
@@ -231,6 +231,8 @@ function createServer() {
 
         return;
       }
+
+      expense.userId = Number(userId);
     }
 
     if (spentAt != null) {
