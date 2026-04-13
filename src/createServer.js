@@ -148,13 +148,19 @@ function createServer() {
   app.post('/expenses', (req, res) => {
     const { userId, spentAt, title, amount, category, note } = req.body;
 
-    if (!userId || !spentAt || !title || !amount || !category) {
+    if (
+      userId == null ||
+      spentAt == null ||
+      title == null ||
+      amount == null ||
+      category == null
+    ) {
       res.sendStatus(400);
 
       return;
     }
 
-    const user = users.find((u) => u.id === userId);
+    const user = users.find((u) => u.id === Number(userId));
 
     if (!user) {
       res.sendStatus(400);
@@ -217,8 +223,8 @@ function createServer() {
       return;
     }
 
-    if (userId) {
-      const user = users.find((u) => u.id === userId);
+    if (userId != null) {
+      const user = users.find((u) => u.id === Number(userId));
 
       if (!user) {
         res.sendStatus(404);
@@ -227,23 +233,23 @@ function createServer() {
       }
     }
 
-    if (spentAt) {
+    if (spentAt != null) {
       expense.spentAt = spentAt;
     }
 
-    if (title) {
+    if (title != null) {
       expense.title = title;
     }
 
-    if (amount) {
+    if (amount != null) {
       expense.amount = amount;
     }
 
-    if (category) {
+    if (category != null) {
       expense.category = category;
     }
 
-    if (note) {
+    if (note != null) {
       expense.note = note;
     }
 
